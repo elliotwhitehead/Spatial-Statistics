@@ -210,13 +210,14 @@ B
 # # PRACTICE 2 *****************************************************************************************PRACTICE 2 (4 pts: 2 pts each)
 
 
-# # PRACTICE 2.1: Change object a from above to a different number, then re-add to b. Describe what happens to your object preceeded by #
-print(a)
+# # PRACTICE 2.1: Change object a from above to a different number, then re-add to b. Describe what happens to your object preceded by #
+a <- 1
+print(sum(a,b))
+# the variable a has been reassigned to the value of 1, and so the sum with b is now 6.
 
 
 # # PRACTICE 2.2: Create a new object called "c" with the sum of a and b 
-
-
+c <- sum(a,b)
 
 
 # # VECTORS # # ------------------------------------------------------------------------------------
@@ -253,13 +254,13 @@ d <- c('ciao', 'gruezi') #still need to use c() to combine elements
 
 
 # PRACTICE 3.1: Create a vector called mytextvector that has both y and d 
-#
+mytextvector <- c('y','d')
 #
 
 
 # PRACTICE 3.2:Create a vector with 5 numbers and find their sum using the sum() command 
-#
-#
+mynumvector <- c(1,2,3,4,5)
+sum(mynumvector)
 
 
 
@@ -273,7 +274,7 @@ d <- c('ciao', 'gruezi') #still need to use c() to combine elements
 data(mtcars)
 
 head(mtcars) #first six rows of DF
-
+tail(mtcars)
 
 # # --> In a data frame, the rows represent recorded observations (rows) for specific variables (columns)
 
@@ -316,20 +317,19 @@ mtcars$mpg[5] # Get the mpg for the 5th car (a Hornet Sportabout in this case)
 # # PRACTICE 4 *****************************************************************************************PRACTICE 4 (2 pts)
 
 # PRACTICE 4.1 : What is the horsepower (column name: hp) of the car in the 10th row =
-#
+cat("The car in the 10th row has", mtcars$hp[10], "horsepower.")
 #
 
-# You can create a smaller dataframeor subset of the larger one using indexing:
+# You can create a smaller dataframe or subset of the larger one using indexing:
 (fewer_cars <- mtcars[1:5,]) # this is a new with only the first 5 rows
 
-#Note: when you place the command in paraentheses, R will print the result in the console
+#Note: when you place the command in parentheses, R will print the result in the console
 
 # Note that "x:y" in R denotes the number x through y (in this case 1 through 5)
 
 # # PRACTICE 5 *****************************************************************************************PRACTICE 5 (2 pts)
 # PRACTICE 5.1 : Create a smaller data frame named fewer_cars2 from mtcars with all rows 1 through 10 and columns 1 through 5.
-#
-#
+fewer_cars2 <- mtcars[1:10,1:5]
 
 
 # # DATAFRAMES: Adding New Data # # -----------------------------------------------------------------
@@ -339,7 +339,8 @@ mtcars$mpg[5] # Get the mpg for the 5th car (a Hornet Sportabout in this case)
 
 fewer_cars$rating <- c(3.5, 4, 4.5 ,2) # Personal ratings for the cars
 
-# ERROR: what happened? Error because = 
+# ERROR: what happened? Error because = a matching vector of ratings was not
+#                                       provided for the size of the dataframe
 
 
 # Now, add a vector as dd$clothes that works
@@ -364,12 +365,21 @@ fewer_cars$mazda <- mazda_car
 
 # # PRACTICE 6 *****************************************************************************************PRACTICE 6 (4 pts: 2 pts each)
 # PRACTICE 6.1 : Now, look at fewer_cars. What changed? Write code to explore the new column names 
-#
+
+# Two new rows have been added. One, with personal ratings for the cars, and 
+# another to denote whether the car is a Mazda or not. 
+
+head(fewer_cars)
+names(fewer_cars)
+print(fewer_cars$mazda)
+print(fewer_cars$rating)
+
+
 # PRACTICE 6.1 :Write code to explore new dimensions of the data frame.
 
-# 
-#
-#
+length(fewer_cars)
+dim(fewer_cars)
+
 
 
 # DELETING DATA FROM A DF # 
@@ -392,31 +402,31 @@ fewer_cars_less_variables <- fewer_cars[,-3] #delete 3rd column from mydf
 
 # # PRACTICE: EXPLORE DATAFRAME # # ----------------------------------------------------------------
 
-dim(fewer_cars) #rows, columns = 
+dim(fewer_cars) #rows, columns = 5, 13
 
-nrow(fewer_cars) #number of rows = 
+nrow(fewer_cars) #number of rows = 5
 
-ncol(fewer_cars) #number of columns =
+ncol(fewer_cars) #number of columns = 13
 
 
 # Dataframe Data Types
 # str gives the structure of an object
 str(fewer_cars) #columns can be "numeric", "factors", or "characters" (or other things too)
 
-# This dataframe has all nunmeric columns and one character (or text) column 
+# This dataframe has all numeric columns and one character (or text) column 
 # we can confirm this
 # Numerical: numerical values (continuous, discrete, integers, etc.)
 
-is.numeric(fewer_cars$mpg) #numeric? = 
+is.numeric(fewer_cars$mpg) #numeric? = TRUE
 
-is.numeric(fewer_cars$mazda) #numeric? = 
+is.numeric(fewer_cars$mazda) #numeric? = FALSE
 
 
 # Character: an object made up of string values
-is.character(fewer_cars$mazda) #character? = 
+is.character(fewer_cars$mazda) #character? = TRUE
 
 # Factor: variables that have limited number of different values or categorical values (e.g., types of cloths) 
-is.factor(fewer_cars$mazda) # Is the mazda variable a factor?
+is.factor(fewer_cars$mazda) # Is the Mazda variable a factor?
 
 # Can change it into a factor:
 fewer_cars$mazda <- as.factor(fewer_cars$mazda)
@@ -428,9 +438,10 @@ levels(fewer_cars$mazda) #The categories in our factor variable
 # # PRACTICE 7 *****************************************************************************************PRACTICE 7 (2 pts)
 
 # Practice 7.1 Check the structure of the fewer_cars dataframe
-#
-#
-
+is.numeric(fewer_cars$mpg)
+is.numeric(fewer_cars$cyl)
+is.character(fewer_cars$mazda)
+is.factor(fewer_cars$mazda)
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
