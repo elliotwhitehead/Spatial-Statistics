@@ -620,7 +620,7 @@ ggplot(mycars, aes(x=1:length(mycars$mpg),y=mpg)) + geom_line()
 # # PRACTICE 11 *****************************************************************************************PRACTICE 11 (2 pts)
 
 # Practice 11.1:  Describe the relationship between mpg and wt.
-#
+# As vehicle weight (wt) increases, the vehicles fuel efficiency (mpg) decreases.
 #
 
 
@@ -640,11 +640,11 @@ ggplot(mycars, aes(x=1:length(mycars$mpg),y=mpg)) + geom_line()
 
 # '~/' represents the home directory. 
 
-setwd('~/Desktop/') #for Windows Users, it is your desktop
-setwd('~/') #for Mac users, it is your home directory
+#setwd('~/Desktop/') #for Windows Users, it is your desktop
+#setwd('~/') #for Mac users, it is your home directory
 
 # You can set it to your Documents using something like:
-setwd('~/Documents/') 
+#setwd('~/Documents/') 
 # If you want to set it to a specific folder in your documents, press tab again after the / and it will show options
 
 
