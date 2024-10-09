@@ -489,11 +489,12 @@ min(mycars$mpg)
 # # PRACTICE 8 *****************************************************************************************PRACTICE 8 (4 pts:2 pts each)
 
 # Practice 8.1 Find the minimum value for horsepower (hp) in the fewer_cars dataframe using the summary function and the min function
-#
+min(fewer_cars$hp)
+summary(fewer_cars$hp)
 
 ## Practice 8.2 Find the maximum value for horsepower (hp)in the fewer_cars dataframe using the summary function and the max function
-
-
+summary(fewer_cars$hp)
+max(fewer_cars$hp)
 
 
 
@@ -519,10 +520,10 @@ length(unique(mycars$cyl)) #number of unique entries. Notice how we're nesting t
 # # PRACTICE 9 *****************************************************************************************PRACTICE 9 (4 pts:2 pts each)
 
 # Practice 9.1 Using code, what are the unique elements of the column gears in the fewer_cars dataframe?
-#
+unique(fewer_cars$gear)
 
 ## Practice 9.2 Using code, how many unique elements ar there in the column gears in the fewer_cars dataframe?
-
+length(unique(fewer_cars$gear))
 
 
 # Sort data
@@ -548,10 +549,10 @@ mycars[which.max(mycars$wt),] # By combining it with indexing, we can find which
 # # PRACTICE 10 *****************************************************************************************PRACTICE 10 (2 pts)
 
 # Practice 10.1:  Using code, find the minimum value of the mycars drat column
-
+cat("The minimum rear axle ratio (drat) is located at row", which.min(mycars$drat), "with a value of", mycars$drat[which.min(mycars$drat)])
 
 # Practice 10.2:  Using code, which record has the minimum value of the mycars drat column
-
+cat("The lowest rear axle ratio (", mycars$drat[which.min(mycars$drat)], ") is found on the", row.names(mycars[which.min(mycars$drat),]))
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
