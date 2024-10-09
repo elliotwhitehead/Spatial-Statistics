@@ -31,7 +31,7 @@
 
 # # INSTALLING PACKAGES # #
 # First we have to install and load a package. This might take a moment:
-install.packages('ggplot2') # NOTE: Once you've installed it, you can comment out or delete this line!
+# install.packages('ggplot2') # NOTE: Once you've installed it, you can comment out or delete this line!
 library(ggplot2) # This loads the package into your "environment" so you can use it!
 
 # # GETTING STARTED # # 
@@ -151,10 +151,15 @@ seq(0, 20, 4) #sequence function: from, to, by
 
 # # PRACTICE 1.1:  Write 3 calculations with operators
 
+1 + 2
+2 * 8
+10 - 5
 
-
-## PRACTICE 1.1:  write 3 calcualtions with functions 
-
+## PRACTICE 1.1:  write 3 calculations with functions 
+sum(1,2)
+prod(2,8)
+diff(10,5)
+abs(-130)
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
@@ -206,7 +211,7 @@ B
 
 
 # # PRACTICE 2.1: Change object a from above to a different number, then re-add to b. Describe what happens to your object preceeded by #
-
+print(a)
 
 
 # # PRACTICE 2.2: Create a new object called "c" with the sum of a and b 
