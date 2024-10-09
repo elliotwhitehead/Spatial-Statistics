@@ -621,7 +621,6 @@ ggplot(mycars, aes(x=1:length(mycars$mpg),y=mpg)) + geom_line()
 
 # Practice 11.1:  Describe the relationship between mpg and wt.
 # As vehicle weight (wt) increases, the vehicles fuel efficiency (mpg) decreases.
-#
 
 
 
