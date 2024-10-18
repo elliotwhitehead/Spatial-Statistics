@@ -1,12 +1,11 @@
 ## GEOG3023 Statistics and Geographic Data
-## Lab 2: Descriptive statistics
+## Lab 3: Descriptive statistics
 
+## Elliot Whitehead
 
-## Your First Name, Your Last Name
+##Use the "Lab3_GraphsAndDescriptiveStats.R" file as the first place to look if you're not sure how to do something.
 
-##Use the "Lab2_Introduction_to_R" file as the first place to look if you're not sure how to do something.
-
-# The enclosed 'ColoradoCovidRecent.csv' file contains the basic covid statistics for the state of Colorado since September 1st, 2021
+# The enclosed 'ColoradoCovid.csv' file contains the basic covid statistics for the state of Colorado since September 1st, 2021
 # The following is the description of each column:
 # Date: each day of record
 # State: Colorado
