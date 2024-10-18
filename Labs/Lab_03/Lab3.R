@@ -104,17 +104,17 @@ ggplot(data=covid, aes(x=covid$days_since_start, y=covid$death)) +
 
 ## QUESTION 4.1 Make a histogram of the daily positivity rate with the mean and median added in red and blue respectively
 
-mean_positive <- mean(covid$positivityRate)
-median_positive <- median(covid$positivityRate)
+mean_positivity <- mean(covid$positivityRate)
+median_positivity <- median(covid$positivityRate)
 
-ggplot(data = covid, aes(x = positivityRate)) +
+ggplot(data = covid, aes(x = covid$positivityRate)) +
   geom_histogram(binwidth = 0.01, fill = "lightgray", color = "black") +
   
   ## QUESTION 4.2 Add a mean vertical line to your histogram in red
-  geom_vline(aes(xintercept = mean_positive), color = "red", linetype = "dashed", size = .5) +
+  geom_vline(aes(xintercept = mean_positivity), color = "red", linetype = "dashed", size = .5) +
   
   ## QUESTION 4.3 Add a median vertical line to your histogram in blue
-  geom_vline(aes(xintercept = median_positive), color = "blue", linetype = "dashed", size = .5) +  # Median line
+  geom_vline(aes(xintercept = median_positivity), color = "blue", linetype = "dashed", size = .5) +  # Median line
   labs(title = "Histogram of Daily Positivity Rate",
        x = "Daily Positivity Rate",
        y = "Count") +
@@ -138,11 +138,18 @@ ggplot(data = covid, aes(x = positivityRate)) +
 ## See: http://www.sthda.com/english/wiki/ggplot2-box-plot-quick-start-guide-r-software-and-data-visualization
 
 # Basic box plot
+ggplot(data = covid, aes(y = covid$positivityRate)) +
+ geom_boxplot(fill = "lightblue", color = "black") +  # Adjust colors as needed
+ labs(title = "Boxplot of Daily Positivity Rate",
+      y = "Daily Positivity Rate") +
+ theme_minimal()
 
 
-## QUESTION 5.2 What are the 25th and 75th percentile (the values to calculate the Interquartile range) values for positivuty Rate?
+## QUESTION 5.2 What are the 25th and 75th percentile (the values to calculate the Interquartile range) values for positivity Rate?
+quartiles <- quantile(covid$positivityRate, probs = c(0.25, 0.75))
+cat("The 25th percentile is", quartiles[1])
+cat("The 75th percentile is:", quartiles[2])
 
-## export image of plot with mean and with median in plot window or take screen shot for word document
 
 
 # End! Once you're done, make sure to save this script (File -> Save)
