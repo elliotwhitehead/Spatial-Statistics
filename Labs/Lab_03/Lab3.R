@@ -90,6 +90,7 @@ ggplot(data=covid, aes(x=covid$days_since_start, y=covid$death)) +
   xlab("Days since March 5th, 2020")
 
 # QUESTION 3.3: What are the trends over the time for these two variables?
+
 # Generally, deaths increased over time, and the positivity rate decreased from high
 # spikes in the first 50 days to a relative stable and constant rate for the remainder
 # of the time in the dataset. Since we didn't clean the data from negative and non-zero 
@@ -103,24 +104,30 @@ ggplot(data=covid, aes(x=covid$days_since_start, y=covid$death)) +
 
 ## QUESTION 4.1 Make a histogram of the daily positivity rate with the mean and median added in red and blue respectively
 
+mean_positive <- mean(covid$positivityRate)
+median_positive <- median(covid$positivityRate)
 
-## In the lecture we used base R. Try to make your histogram using ggplot2 package.Either will get your credit.
-## See this site for instructions on ggplot histograms:
-## http://www.sthda.com/english/wiki/ggplot2-histogram-plot-quick-start-guide-r-software-and-data-visualization
-## for base R use par(mfrow=c(1,1),lwd=4) to return yoru plot frame to a 1:1 matrix
+ggplot(data = covid, aes(x = positivityRate)) +
+  geom_histogram(binwidth = 0.01, fill = "lightgray", color = "black") +
+  
+  ## QUESTION 4.2 Add a mean vertical line to your histogram in red
+  geom_vline(aes(xintercept = mean_positive), color = "red", linetype = "dashed", size = .5) +
+  
+  ## QUESTION 4.3 Add a median vertical line to your histogram in blue
+  geom_vline(aes(xintercept = median_positive), color = "blue", linetype = "dashed", size = .5) +  # Median line
+  labs(title = "Histogram of Daily Positivity Rate",
+       x = "Daily Positivity Rate",
+       y = "Count") +
+  theme_minimal()
 
 
-## QUESTION 4.2 Add a mean vertical line to your histogram in red
-
-
-## QUESTION 4.3 Add a median vertical line to your histogram in blue
-
-
-
-
-## QUESTION 4.4:Is the distribution left-skewed, right-skewed, or fairly symmetric? Answer in the comments?
+## QUESTION 4.4:Is the distribution left-skewed, right-skewed, or fairly symmetric?
+## The distribution is right skewed. There are several large outliers above .3 
+## that skew the data to the right, pulling the mean to the right of the median.
 
 ## QUESTION 4.5: what is the better choice of central tendency? The mean or the median?
+## In this case, the median is the best choice of central tendancy, as the data is much
+## more clustered around this value.
 
 
 ## export image of plot with mean and with median in plot window or take screen shot for word document
