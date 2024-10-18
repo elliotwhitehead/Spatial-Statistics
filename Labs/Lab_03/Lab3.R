@@ -49,6 +49,13 @@ print(date_of_max_tests <- ymd(covid[index_of_max_tests,]$date))
 
 ##In the data frame 'covid', please add a new column called 'positivityRate' 
 # to show the daily positive rate (positiveIncrease/totalTestResultsIncrease)
+positiveIncrease <- covid$positiveIncrease
+totalTestResultsIncrease <- covid$totalTestResultsIncrease
+positivityRate <- positiveIncrease/totalTestResultsIncrease
+
+# ANSWER
+covid["positivityRate"] <- positivityRate
+
 
 
 # QUESTION 3 (6 pts) ******************************************************************************************* 
