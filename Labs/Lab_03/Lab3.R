@@ -18,20 +18,31 @@
 
 ##*******************************************************************************************************************
 #Read the csv file
+covid=read.csv("Lab_03/ColoradoCovid.csv")
 
-
-#read in your data an set working directory
-
-##Daily COVID cases and mortalities in Colorado in Spring 2020
+# install Lubridate for date formatting
+install.packages("lubridate")
+library(lubridate)
 
 
 # QUESTION 1 (4 pts)*********************************************************************************************
-##Please find which date has the most increased death and which date has the most increased positive cases 
-# and which date has the most tests
+##Please find:
 
-# Hint: use which.max() to find the row with the maximum for each separately, then use [] to find the dates, 
-#and put the results in the comments
-# Include both your code and your answer!
+# - which date has the most increased death
+index_of_max_deathInc <- which.max(covid$deathIncrease)
+date_of_max_deathInc <- ymd(covid[index_of_max_deathInc,]$date)
+# Answer: 2020-04-25
+
+# - and which date has the most increased positive cases 
+index_of_max_positiveInc <- which.max(covid$positiveIncrease)
+date_of_max_positivInc <- ymd(covid[index_of_max_positiveInc,]$date)
+# ANSWER: 2020-04-25
+
+# - and which date has the most tests
+index_of_max_tests <- which.max(covid$totalTestResults)
+print(date_of_max_tests <- ymd(covid[index_of_max_tests,]$date))
+# ANSWER: 2020-08-30
+
 
 
 # QUESTION 2 (4pts): ********************************************************************************************
