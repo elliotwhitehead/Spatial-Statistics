@@ -64,14 +64,37 @@ covid["positivityRate"] <- positivityRate
 
 # QUESTION 3.1 PLOT the daily positivity rate over time
 
+##load your package ggplot
+library(ggplot2)
+
 ## HINT: create a new variable in your dataframe for day number since the first date
 ##USE +xlab("days since 9/1/2021") to label your x axis in your graph
-##load your package ggplot
+
+start_date <- ymd(covid$date[1]) #2020-03-05
+days_since_start <- ymd(covid$date) - start_date
+covid["days_since_start"] <- days_since_start
+
+ggplot(data=covid, aes(x=covid$days_since_start, y=covid$positivityRate)) +
+  geom_line()+
+  geom_point()+
+  ylab("COVID Positivity Rate")+
+  xlab("Days since March 5th, 2020")
 
 
 # QUESTION 3.2 PLOT the cumulative deaths over time 
 
+ggplot(data=covid, aes(x=covid$days_since_start, y=covid$death)) +
+  geom_line()+
+  geom_point()+
+  ylab("Cumulative Deaths over Time")+
+  xlab("Days since March 5th, 2020")
+
 # QUESTION 3.3: What are the trends over the time for these two variables?
+# Generally, deaths increased over time, and the positivity rate decreased from high
+# spikes in the first 50 days to a relative stable and constant rate for the remainder
+# of the time in the dataset. Since we didn't clean the data from negative and non-zero 
+# entries, there's some error in the data, likely attributed to lack of data reported
+# on that date (zeros) and corrections in the dataset (negative death increases).
 
 
 ## export image of plot in plot window or take screen shot for word document
