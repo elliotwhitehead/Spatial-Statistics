@@ -132,7 +132,7 @@ head(firePoints)
 ## 0 is the prime meridian in longitude and half way around the globe is 180. 
 
 ## Question 3 ***************************************************************************************************
-##---------------------------------------------------------------------------------------------------------------
+## ---------------------------------------------------------------------------------------------------------------
 ## Q3a. what is the name of the projection for firePoints? 2 pts
 
 
@@ -145,15 +145,15 @@ head(firePoints)
 ## HINT: how far is a decimal degree at the poles compared to the equator in a geographic coordinate system?
 
 
-####**************************************************************************************
+## **************************************************************************************
 
 ## This database is a nice example of the minimum information you may want for a spatial analysis. We have coordinates (a geographic location),
 ## and we have attribute information at that location that varies across space (wildfire size). 
 
-##get the coordinates
+## get the coordinates
 st_coordinates(firePoints)
 
-##explore the class of the object
+## explore the class of the object
 class(st_coordinates(firePoints))
 dim(st_coordinates(firePoints))
 
@@ -163,9 +163,9 @@ dim(st_coordinates(firePoints))
 
 
 ## QUESTION 4 **************************************************************************************
-##--------------------------------------------------------------------------------------------------
+## --------------------------------------------------------------------------------------------------
 ## Q4a: ##What is the mean center x coordinate value for wildfires in 2020?  Name the Mean center x object as MCx.Show code and answer. 2 pts. 
-##Create a vector for X and Y
+## Create a vector for X and Y
 
 
 
@@ -173,7 +173,7 @@ dim(st_coordinates(firePoints))
 
 
 
-##Step 6***********************************************************************************************
+## Step 6***********************************************************************************************
 
 ## Create a dataframe by combining the X and Y mean centers. 
 (meanCenter <- data.frame(cbind(MCx, MCy)))
@@ -181,14 +181,14 @@ dim(st_coordinates(firePoints))
 ## Create sf object
 (meanCenter_sf <- st_as_sf(meanCenter,coords=c("MCx", "MCy"), crs = st_crs(fires)))
 
-##Note - we give the function st_as_sf the dataframe called meanCenter and we tell it that the coords are in the columns named "Mcx" and "MCy".
-##Remember when we wrap our line of code in (), it will print the result in the console. This is very useful when you want to see what you are doing. 
+## Note - we give the function st_as_sf the dataframe called meanCenter and we tell it that the coords are in the columns named "Mcx" and "MCy".
+## Remember when we wrap our line of code in (), it will print the result in the console. This is very useful when you want to see what you are doing. 
 
-#Create fields with X and Y coordinates
+## Create fields with X and Y coordinates
 meanCenter_sf$MCx <- MCx
 meanCenter_sf$MCy <- MCy
 
-#Explore the new fields
+## Explore the new fields
 (meanCenter_sf)
 
 
@@ -203,7 +203,7 @@ ggplot(firePoints) +
 ## Step 7*******************************************************************************************
 ## Now calculate the central feature and compare it to the mean center. 
 
-##Calculate the distance between ten points to get a sense of what the st_distance function does. 
+## Calculate the distance between ten points to get a sense of what the st_distance function does. 
 (distSubset <- st_distance(firePoints[1:10,]))
 
 ## It is calculating the distance between each point and all other points in meters. Each point has 
@@ -225,7 +225,7 @@ which(distMeans==distMin)
 
 
 ## Question 5 ***************************************************************************************
-##--------------------------------------------------------------------------------------------------
+## --------------------------------------------------------------------------------------------------
 
 ## Q5a. Determine which point in the firePoints is the central feature within the firePoints sf object using the results above. 
 ## HINT: Filter the firePoints layer to only have this point and name it centralFeature. You know the row number. 
@@ -239,11 +239,9 @@ which(distMeans==distMin)
 
 
 ## ********************************************************************************************************************************
-
 ## Step 8*************************************************************************************************************************
-
 ## Question 6 ************************************************************************************************************
-##------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------------------------------
 ## Q6a. calculate the median center of firePoints. Name the point medianCenter and add it to a map of firePoints with the mean center and central feature.
 ## Fill the medianCenter in yellow. 8 pts. 
 ## HINT: follow steps in step 6 to create a meanCenter, but use median. 
@@ -284,8 +282,7 @@ library(units)
 
 
 
-####**************************************************************************************
-
+## *************************************************************************************
 ## Step 9 ******************************************************************************
 
 ## Map the variable 'area' for our wildfire points.
@@ -303,7 +300,7 @@ ggplot() + geom_point(data = firePoints, aes(x=st_coordinates(firePoints)[,1], y
 
 
 ## QUESTION 8 **************************************************************************************
-##----------------------------------------------------------------------------------------------------
+## ----------------------------------------------------------------------------------------------------
 ## Q8a: What region of the US appears to have the largest fire according to your graduated symbol map? 2 pts.
 
 
@@ -313,7 +310,7 @@ ggplot() + geom_point(data = firePoints, aes(x=st_coordinates(firePoints)[,1], y
 ## Q8c: Add a central tendency  point to the map by rewriting the above code to include the mean center, central feature or median center point. 6 pts. f
 
 
-##****************************************************************************************************
+## ****************************************************************************************************
 
 ## Step 10 ************************************************************************************************
 
@@ -321,7 +318,7 @@ ggplot() + geom_point(data = firePoints, aes(x=st_coordinates(firePoints)[,1], y
 ## Bring in US states spatial data. 
 
 ## Question 9 ******************************************************************************************
-##-------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------------
 ## Q9a: read in US states data and create a sf object and call the variable 'states' - 2 pts.
 ## HINT: look at code where we read in the fires at begining of lab. 
 ## The US states shapefile is called: cb_2018_us_state_20m.shp 
@@ -417,9 +414,9 @@ ggplot() +
 
 
 
-##*****************************************************************************************************
+## *****************************************************************************************************
 ## Question 12*****************************************************************************************
-##----------------------------------------------------------------------------------------------------
+## ----------------------------------------------------------------------------------------------------
 
 ## Q12a. Count the number of fires in each. Which state has the highest number of fires? 8 pts
 ## USe the tools you have learned. How would yo do this? HINT - you will need to make a new field in firePoints. 
