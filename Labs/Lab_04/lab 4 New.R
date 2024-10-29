@@ -366,7 +366,7 @@ ggplot() + geom_point(data = firePoints, aes(x=st_coordinates(firePoints)[,1], y
 ## Q8b: What region of the US appears to have the most large fires according to your graduated symbol map? 2 pts.
 
 ## The West Coast of the continental US appears to have the largest wildfires.
-## But New Mexico and Wyoming had some big ones too.
+## But Oregon and Arizona had some big ones too.
 
 ## Q8c: Add a central tendency  point to the map by rewriting the above code to include:
 ##      the mean center, central feature or median center point. 6 pts.
@@ -409,7 +409,7 @@ st_crs(firePoints) ## firePoints is using the PROJCRS system, using the NA Alber
 ## so that we can run spatial analyses.
 
 
-## reproject using st_transform. You need to provide the crs of firePoints
+## re-project using st_transform. You need to provide the crs of firePoints
 states <- st_transform(states, crs = st_crs(firePoints))
 
 st_crs(states) ## confirmed.
@@ -418,14 +418,21 @@ st_crs(states) ## confirmed.
 ## Question 10*******************************************************************************************
 ## -------------------------------------------------------------------------------------------------------
 ## Q10a Map the state polygons with the firePoints over the state boundary polygons. 2 pts. 
-
-
+  ggplot() + geom_sf(data=states, fill="lightgrey") + 
+    ##scale_size_continuous(name="areaFire")+ ggtitle("Area of US Wildfires in 2020") + xlab("Longitude (m)") + ylab("Latitude (m)") + 
+    geom_point(data = firePoints, aes(x=st_coordinates(firePoints)[,1], y=st_coordinates(firePoints)[,2]))
+  
+  
 ## Q10b. List two states that did not have any wildfires in 2020. 2 pts. 
 
+## Michigan and Maine did not have wildfires in 2020. 
 
-## Q10c. Calculate the area of each state. Create a field called 'areaState' and make it equal to the area of each state in hectares. 4pts. 
+## Q10c. Calculate the area of each state. Create a field called 'areaState' 
+## and make it equal to the area of each state in hectares. 4pts. 
 ## HINT: we did this above with areaFire.
 
+## save state areas in hectares
+areaState <- st_area(states)/10000
 
 
 ## ********************************************************************************************************
