@@ -357,16 +357,24 @@ ggplot() + geom_point(data = firePoints, aes(x=st_coordinates(firePoints)[,1], y
   scale_size_continuous(name="areaFire")+ ggtitle("Area of US Wildfires in 2020") + xlab("Longitude (m)") + ylab("Latitude (m)")
 
 
-
 ## QUESTION 8 **************************************************************************************
 ## ----------------------------------------------------------------------------------------------------
 ## Q8a: What region of the US appears to have the largest fire according to your graduated symbol map? 2 pts.
 
+## California had the largest fire.
 
 ## Q8b: What region of the US appears to have the most large fires according to your graduated symbol map? 2 pts.
 
+## The West Coast of the continental US appears to have the largest wildfires.
+## But New Mexico and Wyoming had some big ones too.
 
-## Q8c: Add a central tendency  point to the map by rewriting the above code to include the mean center, central feature or median center point. 6 pts. f
+## Q8c: Add a central tendency  point to the map by rewriting the above code to include:
+##      the mean center, central feature or median center point. 6 pts.
+
+ggplot() + geom_point(data = firePoints, aes(x=st_coordinates(firePoints)[,1], y=st_coordinates(firePoints)[,2],size=as.numeric(areaFire))) + 
+  scale_size_continuous(name="areaFire")+ ggtitle("Area of US Wildfires in 2020") + xlab("Longitude (m)") + ylab("Latitude (m)") + 
+  ## Add the median center
+  geom_point(aes(x=med_X, y=med_Y), size=3, fill="green", shape=23)  
 
 
 ## ****************************************************************************************************
@@ -379,7 +387,7 @@ ggplot() + geom_point(data = firePoints, aes(x=st_coordinates(firePoints)[,1], y
 ## Question 9 ******************************************************************************************
 ## ------------------------------------------------------------------------------------------------------
 ## Q9a: read in US states data and create a sf object and call the variable 'states' - 2 pts.
-## HINT: look at code where we read in the fires at begining of lab. 
+## HINT: look at code where we read in the fires at beginning of lab. 
 ## The US states shapefile is called: cb_2018_us_state_20m.shp 
 ## It should be in your data folder. 
 
