@@ -14,7 +14,6 @@ library(sf)
 library (tidyverse)
 library(terra)
 library(ggplot2)
-library(units)
 
 ## set working directory -change this to your working directory.
 setwd('~/Downloads/00_School/GEOG 3023/Labs')
@@ -314,20 +313,32 @@ ggplot(firePoints) +
 ## Question 7*************************************************************************************************
 ##----------------------------------------------------------------------------------------------------------------
 
-## Q7a. Plot a histogram of the area of wildfires.Show code. 2 pts
-## since our area has units in hectares, you must first open the package called units. 
+## Q7a. Plot a histogram of the area of wildfires. Show code. 2 pts
+##      since our area has units in hectares, you must first open the package called units. 
+
 library(units)
+library(scales)
+ggplot(firePoints, aes(x = as.numeric(areaFire))) +
+  geom_histogram(binwidth = 10000, fill = "blue", color = "black") +
+  labs(title = "Histogram of Values", x = "Fire Area [hectares]", y = "Frequency") + 
+  ## display mean as a dashed red line
+  geom_vline(aes(xintercept = mean(as.numeric(areaFire))), color = "red", linetype = "dashed", size = 1) +
+  ## display median as a dashed yellow line
+  geom_vline(aes(xintercept = median(as.numeric(areaFire))), color = "yellow", linetype = "dashed", size = 1) +
+  scale_x_continuous(labels = label_number()) # Use decimal formatting on the x axis
 
+## Q7b. Describe the distribution of wildfire size in 2020. Be specific if it is skewed. 2 pts. 
 
-
-
-
-##Q 7b. Describe the distribution of wildfire size in 2020. Be specific if it is skewed. 2 pts. 
-
+## the distribution is heavily skewed to the right, with the August Complex fire 
+## representing a massive outlier in the data at 432525.152ha. Nearly all of the 
+## fires fall within the first two bins of the histogram, while the August Complex 
+## Fire is 40 bins away to the right. It would be interesting to see a histogram
+## of the data without this outlier present. 
 
 
 ##Q 7c. What is the maximum fire size and what fire incident recorded it? 2 pts. 
 
+## The August Complex Fire with a size of 432525.152ha. 
 
 
 ## *************************************************************************************
