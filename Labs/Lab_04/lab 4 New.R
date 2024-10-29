@@ -22,7 +22,7 @@ setwd('~/Downloads/00_School/GEOG 3023/Labs')
 ## step 2 read in wildfire data using sf package   ***************************************
 
 ## read in the wildfire data
-fires <-st_read("Lab_04/data/mtbs_wildfires_2020.shp")
+fires <- st_read("Lab_04/data/mtbs_wildfires_2020.shp")
 
 class(fires)  
 
@@ -391,22 +391,28 @@ ggplot() + geom_point(data = firePoints, aes(x=st_coordinates(firePoints)[,1], y
 ## The US states shapefile is called: cb_2018_us_state_20m.shp 
 ## It should be in your data folder. 
 
+## read in states shapefile
+states <- st_read("Lab_04/data/cb_2018_us_state_20m.shp")
 
+## Q9b: what is the coordinate reference system of states (e.g., GEOGCRS or PROCRS?)? 
+##      How does this compare to the projection of our fire data? - 2 pts. 
+##      (HINT: use the function to check the coordinate reference system)
+##      It is important that all spatial data is in the same projection so that we can overlay them. 
 
-## Q9b: what is the coordinate reference system of states (e.g., GEOGCRS or PROCRS?)? How does this compare to the projection of our fire data? - 2 pts. 
-## (HINT: use the function to check the coordinate reference system)
-## It is important that all spatial data is in the same projection so that we can overlay them. 
-
-
-
+## get states coordinate reference system
+st_crs(states) ## states is using the GEOCRS system, using a NAD83 projection
+st_crs(firePoints) ## firePoints is using the PROJCRS system, using the NA Albers Equal Area Conic projection
 
 ## *****************************************************************************************************
 
-## We will need to reproject the state data to match that of the wildfire data so that we can run spatial analyses.
+## We will need to re-project the state data to match that of the wildfire data
+## so that we can run spatial analyses.
 
 
 ## reproject using st_transform. You need to provide the crs of firePoints
 states <- st_transform(states, crs = st_crs(firePoints))
+
+st_crs(states) ## confirmed.
 
 
 ## Question 10*******************************************************************************************
