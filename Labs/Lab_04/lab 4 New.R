@@ -263,7 +263,7 @@ ggplot(firePoints) +
 
 ## Q5b. Describe where the central feature with respect to the mean center. Does this make sense to you? Why?  4 pts
 ## The central feature is the closest feature to the mean center. This makes perfect sense, 
-## as that's the definition of the the entral feature!
+## as that's the definition of the central feature!
 
 
 ## ********************************************************************************************************************************
