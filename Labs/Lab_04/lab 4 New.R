@@ -138,7 +138,7 @@ head(firePoints)
 
 ## Question 3 ***************************************************************************************************
 ## ---------------------------------------------------------------------------------------------------------------
-## Q3a. what is the name of the projection for firePoints? 2 pts
+## Q3a. What is the name of the projection for firePoints? 2 pts
 ## This map is using the North_America_Albers_Equal_Area_Conic projection.
 
 
@@ -173,18 +173,20 @@ dim(st_coordinates(firePoints))
 
 ## QUESTION 4 **************************************************************************************
 ## --------------------------------------------------------------------------------------------------
-## Q4a: ##What is the mean center x coordinate value for wildfires in 2020?  Name the Mean center x object as MCx.Show code and answer. 2 pts. 
+## Q4a: ## What is the mean center x coordinate value for wildfires in 2020?  Name the Mean center x object as MCx.Show code and answer. 2 pts. 
 ## Create a vector for X and Y
 coords <- st_coordinates(firePoints)
 X_coords <- coords[,1]
+MCx <- mean(X_coords)
+cat(MCx)
+# the Mean Center x coordinate is: -395294.7
+
+
+## Q4b: ## What is the mean center y coordinate value for wildfires in 2020? Name the Mean center Y object as MCy.  show code and answer. 2 pts. 
 Y_coords <- coords[,2]
-
-
-
-
-## Q4b: ##What is the mean center y coordinate value for wildfires in 2020? Name the Mean center Y object as MCy.  show code and answer. 2 pts. 
-
-
+MCy <- mean(Y_coords)
+cat(MCy)
+# the Mean Center y coordinate is: -241134.2
 
 ## Step 6***********************************************************************************************
 
@@ -242,13 +244,26 @@ which(distMeans==distMin)
 
 ## Q5a. Determine which point in the firePoints is the central feature within the firePoints sf object using the results above. 
 ## HINT: Filter the firePoints layer to only have this point and name it centralFeature. You know the row number. 
-## Get to coordinates for x and y of the central feature. Make new fields in centralFeature with the coordinate column names (as we did in the mean center) 
+## Get two coordinates for x and y of the central feature. Make new fields in centralFeature with the coordinate column names (as we did in the mean center) 
 ## and map it onto your previous map. 
 ## Fill the central feature with blue. 8 pts. 
+centralFeature <- firePoints[18,]
 
+cf_coords <- st_coordinates(centralFeature)
+cf_X <- cf_coords[,1]
+cf_Y <- cf_coords[,2]
 
+centralFeature["X"] <- cf_X
+centralFeature["Y"] <- cf_Y
+
+ggplot(firePoints) + 
+  geom_sf()+ 
+  geom_point(data = meanCenter_sf,aes(x = MCx, y = MCy),  size = 7, fill="red", shape = 23) + 
+  geom_point(data=centralFeature,aes(x = cf_X, y = cf_Y), size = 3, fill="blue", shape = 21)
 
 ## Q5b. Describe where the central feature with respect to the mean center. Does this make sense to you? Why?  4 pts
+## The central feature is the closest feature to the mean center. This makes perfect sense, 
+## as that's the definition of the the entral feature!
 
 
 ## ********************************************************************************************************************************
