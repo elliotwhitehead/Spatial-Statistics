@@ -68,6 +68,7 @@ plot(fires[1:100,])
 ggplot(fires[1:100,]) + 
   geom_sf()
 
+
 ## ****************************************************************************************
 
 ## Step 3 *********************************************************************
@@ -177,6 +178,7 @@ dim(st_coordinates(firePoints))
 ## Create a vector for X and Y
 coords <- st_coordinates(firePoints)
 X_coords <- coords[,1]
+
 MCx <- mean(X_coords)
 cat(MCx)
 # the Mean Center x coordinate is: -395294.7
@@ -270,20 +272,38 @@ ggplot(firePoints) +
 ## Step 8*************************************************************************************************************************
 ## Question 6 ************************************************************************************************************
 ## ------------------------------------------------------------------------------------------------------------------------
-## Q6a. calculate the median center of firePoints. Name the point medianCenter and add it to a map of firePoints with the mean center and central feature.
+## Q6a. calculate the median center of firePoints. Name the point medianCenter 
+## and add it to a map of firePoints with the mean center and central feature.
 ## Fill the medianCenter in yellow. 8 pts. 
 ## HINT: follow steps in step 6 to create a meanCenter, but use median. 
 
+## the median center is the x,y coordinate which is the median of all the x coordinates, 
+## and all the y coordinates
 
+med_X <- median(X_coords)
+med_Y <- median(Y_coords)
 
+ggplot(firePoints) + 
+  geom_sf()+ 
+  geom_point(data=meanCenter_sf, aes(x=MCx, y=MCy),  size=7, fill="red", shape=23) + 
+  geom_point(data=centralFeature, aes(x=cf_X, y=cf_Y), size=3, fill="blue", shape=21) + 
+  geom_point(aes(x=med_X, y=med_Y), size=3, fill="yellow", shape=23)
 
+## Q6b. Describe where the median center is with respect to the mean center and central feature.
+##      Does this make sense to you? Why?  4 pts
 
-## Q6b. Describe where the median center is with respect to the mean center and central feature. Does this make sense to you? Why?  4 pts
-
-
+## The median center is south of the mean center and central feature. this makes sense, because
+## both the mean center and central feature are sensitive to outliers, and there is are several
+## fires way up in Alaska which would pull the mean up north, and away from the median. The outliers
+## to the northeast balance out the "west-ness" of the outliers in Alaska, so the mean center is
+## pretty close to the median center on the E/W axis.
 
 
 ## Q6c. Which point best represents the spatial central tendency in your view and why? 4 pts. 
+
+## All three of these points do a good job at representing the central tendency of the data.
+## While the mean center, and thus the central feature are pulled a bit northward by the outliers
+## in Alaska, they are still quite close to the median. 
 
 ## ****************************************************************************************************************
 ## Part 2 *********************************************************************************************************
