@@ -7,11 +7,14 @@
 ## install.packages("sf")
 ## install.packages("terra")
 ## install.packages("tidyverse")
+## install.packages("dplyr")
+
 
 library(sf)
 library (tidyverse)
 library(terra)
 library(ggplot2)
+library(units)
 
 ## set working directory -change this to your working directory.
 setwd('~/Downloads/00_School/GEOG 3023/Labs')
@@ -82,7 +85,7 @@ myArea <- st_area(fires)/10000
 ## add a field to the dataframe equal to the area in ha.
 fires$areaFire <- myArea
 
-#check your work
+# check your work
 head(fires)
 
 ## Create a field in hectares and add it to fires
@@ -105,10 +108,12 @@ dim(firePoints)
 ## Question 2. **********************************************************************
 ##----------------------------------------------------------------------------------
 ## Q2a. Plot the firePoints. Show your code using ggplot(). 2pts. 
+ggplot(firePoints[1:100,]) + 
+  geom_sf()
 
 
-
-## Q2b. What region of the US did not have many fires in 2020? 2pts. 
+## Q2b. What region of the US did not have many fires in 2020? 2pts.
+## The Northeast and Midwest of the US did not have many fires in 2020.
 
 
 ## Step 5 **********************************************************************************
@@ -134,15 +139,19 @@ head(firePoints)
 ## Question 3 ***************************************************************************************************
 ## ---------------------------------------------------------------------------------------------------------------
 ## Q3a. what is the name of the projection for firePoints? 2 pts
+## This map is using the North_America_Albers_Equal_Area_Conic projection.
 
 
 ## Q3b: What is the unit of measurement for this projection? (e.g., meters, feet, degrees) 2 pts.
-## HINT: look for LENGTHUNIT[] as you read down through the st_crs() print out. 
-
+## HINT: look for LENGTHUNIT[] as you read down through the st_crs() print out.
+## The length unit is metres.
 
 
 ## Q 3c. Why is the unit of length important to know for spatial analyses?  2 pts. 
 ## HINT: how far is a decimal degree at the poles compared to the equator in a geographic coordinate system?
+## One degree of longitude is about 111km at the equator, as you approach the poles however, the distance of one degree approaches 0.
+## Representations of spatial distances can vary greatly depending on the units of measurement, and the 
+## map projection being used. Units are also important to take note of for area and density calculations.
 
 
 ## **************************************************************************************
@@ -166,6 +175,10 @@ dim(st_coordinates(firePoints))
 ## --------------------------------------------------------------------------------------------------
 ## Q4a: ##What is the mean center x coordinate value for wildfires in 2020?  Name the Mean center x object as MCx.Show code and answer. 2 pts. 
 ## Create a vector for X and Y
+coords <- st_coordinates(firePoints)
+X_coords <- coords[,1]
+Y_coords <- coords[,2]
+
 
 
 
@@ -419,7 +432,7 @@ ggplot() +
 ## ----------------------------------------------------------------------------------------------------
 
 ## Q12a. Count the number of fires in each. Which state has the highest number of fires? 8 pts
-## USe the tools you have learned. How would yo do this? HINT - you will need to make a new field in firePoints. 
+## Use the tools you have learned. How would yo do this? HINT - you will need to make a new field in firePoints. 
 ## your final field in 'states' needs to be called 'fireCount'
 
 
