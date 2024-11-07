@@ -418,11 +418,11 @@ st_crs(states) ## confirmed.
 ## Question 10*******************************************************************************************
 ## -------------------------------------------------------------------------------------------------------
 ## Q10a Map the state polygons with the firePoints over the state boundary polygons. 2 pts. 
-  ggplot() + geom_sf(data=states, fill="lightgrey") + 
-    ##scale_size_continuous(name="areaFire")+ ggtitle("Area of US Wildfires in 2020") + xlab("Longitude (m)") + ylab("Latitude (m)") + 
-    geom_point(data = firePoints, aes(x=st_coordinates(firePoints)[,1], y=st_coordinates(firePoints)[,2]))
-  
-  
+ggplot() + geom_sf(data=states, fill="lightgrey") + 
+  ##scale_size_continuous(name="areaFire")+ ggtitle("Area of US Wildfires in 2020") + xlab("Longitude (m)") + ylab("Latitude (m)") + 
+  geom_point(data = firePoints, aes(x=st_coordinates(firePoints)[,1], y=st_coordinates(firePoints)[,2]))
+
+
 ## Q10b. List two states that did not have any wildfires in 2020. 2 pts. 
 
 ## Michigan and Maine did not have wildfires in 2020. 
@@ -463,13 +463,17 @@ head(states)
 ## Question 11 ******************************************************************************************
 ## ------------------------------------------------------------------------------------------------------
 ## Q11a.  Which state had the most hectares burned in 2020? - 2 pts. 
+states$NAME[which.max(states$areaFire)]
 
-
+## California had the most hectares burned in 2020
 
 ## Q11b. Create a new field in your 'states' sf object called 'PercentAreaBurned'and make it equal to
-## the areaFire / areaState. 4 pts. Show your code. 
+## the areaFire / areaState. 4 pts. Show your code.
 
 
+
+## check if field is NA, and compute value if not.
+states$PercentAreaBurned <- ifelse(is.na(states$areaFire), 0, states$areaFire/areaState)
 
 
 ## Q11c. Create two maps: 1 - a map of states displayed by variable 'areaFire' and 2 - a map of states displayed by 'PercentAreaBurned'. 
@@ -477,7 +481,7 @@ head(states)
 
 ## To map this data as continuous data, you will need to convert the area fields to numeric using function as.numeric()
 
-## Example - the scale_fill_fermenter () is a color package that allows to color in our polygons using already specified colors. 
+## Example - the scale_fill_fermenter() is a color package that allows to color in our polygons using already specified colors. 
 ## the direction = 1 keeps the dark colors in the highest values. 
 
 ## see your options for palette colors here: https://ggplot2.tidyverse.org/reference/scale_brewer.html
@@ -486,11 +490,25 @@ ggplot() +
   geom_sf(data = states, aes(fill=as.numeric(areaFire) ) )+
   scale_fill_fermenter(palette = "Oranges",n.breaks = 9, direction=1)
 
-
-
-## Q11d. How do your maps from above differ? Does summing the wildfire hectares by state provide an example of the Modifiable Areal Unit Problem (MAUP)? 
+## Q11d. How do your maps from above differ? Does summing the wildfire hectares
+## by state provide an example of the Modifiable Areal Unit Problem (MAUP)? 
 ## Why or Why not? Define MAUP and then provide answer. - 8 pts
 
+## Instead of showing the individual areas of all the fires, the states are now
+## color-coded based on how much total area burned in the state. 
+
+## A Modifiable Unit Area Problem (MAUP) is when the unit of analysis in a chart
+## affects the statistical results
+
+## Yes, there are some MAUP considerations to this new plot. First, there is a
+## zonal consideration regarding the boundaries. The boundary lines of US States
+## Is a political boundary and doesn't have that much to do with the ecological
+## differences at a local scale. Also, there is a scale problem with the units of
+## measurement. California is such an outlier in this data, that it appears as if
+## There were hardly any other wildfires in the rest of the states. This map makes
+## it seam like California is nearly the only state experiencing sever wildfire,
+## and also reduced the resolution to be able to differentiate data between all
+## the other states in west / midwest.
 
 
 
@@ -501,6 +519,8 @@ ggplot() +
 ## Q12a. Count the number of fires in each. Which state has the highest number of fires? 8 pts
 ## Use the tools you have learned. How would yo do this? HINT - you will need to make a new field in firePoints. 
 ## your final field in 'states' needs to be called 'fireCount'
+
+## add fireCount to data set
 
 
 
