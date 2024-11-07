@@ -2,18 +2,18 @@
 
 ## There are a total of 104 points in this lab across 6 questions. Please make sure to answer all questions. 
 
-# Lab 5 focus on correlations and linear regressions
+## Lab 5 focus on correlations and linear regressions
 ## data from: https://worldhappiness.report/ed/2022/#appendices-and-data - data for Table 2.1
 ## world country boundaries from: https://hub.arcgis.com/datasets/esri::world-countries-generalized/explore?location=-0.329878%2C0.000000%2C1.52
 
-##bring in libraries
+## bring in libraries
 
 library(sf)
 library(dplyr)
 library (tidyverse)
 library(ggplot2)
 
-##Step 1 ***************************************************************************
+## Step 1 ***************************************************************************
 ## set your working directory - change this to your working directory.
 setwd('C:/Users/tchapman.TNC/Desktop/Classes/GEOG 3032 Spatial stats/Labs/Lab 5/data')
 
@@ -26,7 +26,7 @@ head(happinessData)
 dim(happinessData)
 
 ## select one country and map happiness measured in life ladder over time. 
-##example for US. 
+## example for US. 
 
 ## find unique countries in happiness database and print
 ## the unique function is useful for seeing all unique elements in a column. 
@@ -57,12 +57,12 @@ head(happinessDataUS)
 ## plot US happiness Life ladder over time in a scatter plot using base R
 plot(x=happinessDataUS$year, y=happinessDataUS$Life.Ladder, main = "US Mean Life.Ladder, 2008 - 2020")
 
-# Plot the scatter plot with ggplot
+## Plot the scatter plot with ggplot
 ggplot(happinessDataUS) + aes(x=year, y=Life.Ladder) + geom_point()+
   ggtitle("US Mean Life.Ladder, 2008 - 2020")
 
-##Question 1 ********************************************************************
-##-------------------------------------------------------------------------------
+## Question 1 ********************************************************************
+## -------------------------------------------------------------------------------
 
 ## Q 1a. Select a different country and a different metric of happiness from the database and create a scatter plot over time. 
 ## Make sure to change the title of the graph. Repeat the operation in base R and tidyverse. Show your code. 4 pts. 
@@ -72,7 +72,7 @@ ggplot(happinessDataUS) + aes(x=year, y=Life.Ladder) + geom_point()+
 ## Q1b. Describe the trend over time. Is it positive or negative or neutral? 2 pts.
 
 
-##****************************************************************************
+## ****************************************************************************
 
 ## Step 2 ********************************************************************
 ##Now let's look at two countries in base R
@@ -130,8 +130,8 @@ happinessDataUSGermany %>%
   )
 
 
-##Question 2 ********************************************************************
-##-------------------------------------------------------------------------------
+## Question 2 ********************************************************************
+## -------------------------------------------------------------------------------
 
 ## Q 2a. Select two different countries (not the US or Germany) and a different variable from the database (not Life.Ladder) 
 ## and create a comparison scatter plot of the variable over time between the two countries. 
@@ -152,7 +152,7 @@ happinessDataUSGermany %>%
 
 
 
-##Step 3 Correlations ****************************************************************************
+## Step 3 Correlations ****************************************************************************
 
 ## Now we are going to look at correlations of happiness with other variables. 
 ## For the entire database (all countries), let's explore if life ladder correlates with freedom to make life choices and Gross Domestic product). 
@@ -163,7 +163,7 @@ happinessDataUSGermany %>%
 (names(happinessData))
 
 ## Question 3 ******************************************************************************
-##-------------------------------------------------------------------------------
+## -------------------------------------------------------------------------------
 
 ## Q3a. Create a scatter plot of freedom to make life choices and life ladder including all countries and all years 2pts
 ## Repeat with base R and ggplot
@@ -186,14 +186,14 @@ happinessDataUSGermany %>%
 
 
 
-##Q3e. Comparing the two scatterplots, which two variables do you think will have a larger correlation (R) value? Why? Be specific. 4 pts. 
+## Q3e. Comparing the two scatterplots, which two variables do you think will have a larger correlation (R) value? Why? Be specific. 4 pts. 
 
 
 
 
-##*************************************************************************************************
+## *************************************************************************************************
 
-##Now let's calculate the Pearson's Correlation coefficient for these two groups of variables. 
+## Now let's calculate the Pearson's Correlation coefficient for these two groups of variables. 
 
 ## We can use the built in function cor() in R. 
 cor(happinessData$Freedom.to.make.life.choices, happinessData$Life.Ladder)
@@ -216,10 +216,10 @@ cor(happinessData$Freedom.to.make.life.choices, happinessData$Life.Ladder)
 ## we see that the correlation coefficient of 0.525 - that's strong and positive. 
 
 
-##Question 4*****************************************************************************************
-##-------------------------------------------------------------------------------
+## Question 4*****************************************************************************************
+## -------------------------------------------------------------------------------
 
-##Q4a. Run the correlation between Gross Domestic Product (GDP) per capita (Log.GDP.per.capita) and life ladder. Show code. 4 pts. 
+## Q4a. Run the correlation between Gross Domestic Product (GDP) per capita (Log.GDP.per.capita) and life ladder. Show code. 4 pts. 
 
 
 
@@ -241,19 +241,19 @@ cor(happinessData$Freedom.to.make.life.choices, happinessData$Life.Ladder)
 
 
 
-##Step 4 *******************************************************************************************************
+## Step 4 *******************************************************************************************************
 
 ## Linear Models
 
 fit_LinearModel <- lm(happinessData$Life.Ladder ~ happinessData$Freedom.to.make.life.choices)
 
 
-# show the summary of the fitted linear model
+## show the summary of the fitted linear model
 summary(fit_LinearModel)
 
 
 ## we can also get the slope and intercept
-# We can access the fitted intercepts and slope values
+## We can access the fitted intercepts and slope values
 fit_LinearModel$coefficients # this is a vector with two entries, the first one is intercept and other is slope
 
 
@@ -261,18 +261,18 @@ fit_LinearModel$coefficients[1] # is the intercept
 fit_LinearModel$coefficients[2] # is the slope
 
 ## Now let's add the line to our scatter plot - make sure to place Life.Ladder on the y axis. 
-##In base R, we use the function abline() to add lines to a scatterplot and we put the linear model in the function
+## In base R, we use the function abline() to add lines to a scatterplot and we put the linear model in the function
 plot(happinessData$Freedom.to.make.life.choices, happinessData$Life.Ladder)
 abline(lm(happinessData$Life.Ladder ~happinessData$Freedom.to.make.life.choices), col='red', lwd=4)
 
 ## and in ggplot
-##In ggplot, we call a smoothed line function using the linear model as the line
+## In ggplot, we call a smoothed line function using the linear model as the line
 
 ggplot(happinessData) + aes(x=Freedom.to.make.life.choices, y=Life.Ladder) + geom_point() +
   geom_smooth(method='lm', formula=y~x, color = "red")
 
 ## Question 5*******************************************************************************************
-##-------------------------------------------------------------------------------
+## -------------------------------------------------------------------------------
 
 ## Q5a. Create a linear model predicting life ladder with Log.GDP.per.capita. 4 pts
 
@@ -293,22 +293,22 @@ ggplot(happinessData) + aes(x=Freedom.to.make.life.choices, y=Life.Ladder) + geo
 
 
 
-##Step 5******************************************************************************************************
+## Step 5******************************************************************************************************
 
 ## Now we will map the data.
 
-##Read in your world country boundaries. 
+## Read in your world country boundaries. 
 
 countries <- st_read("World_Countries__Generalized_.shp") 
 
-# explore the data
+## explore the data
 head(countries)
 
-#map the polygons
+## map the polygons
 ggplot(countries) + geom_sf()
 
 ## Note that the country variable in the spatial database is called 'COUNTRY' and the column in the 
-##happinessdata is called 'country'.
+## happinessdata is called 'country'.
 
 
 ## We can join the happinessData to the spatial data together by these column in Base R using the merge() function.
@@ -317,7 +317,7 @@ ggplot(countries) + geom_sf()
 
 countriesH <- merge(countries, happinessData, by.x= "COUNTRY", by.y = "country", all.x = TRUE)
 
-# check your work
+## check your work
 head(countriesH)
 
 ggplot(countriesH) + geom_sf()
@@ -328,7 +328,7 @@ ggplot(countriesH) + geom_sf()
 countriesH <- countries %>%
   left_join(happinessData, by = c("COUNTRY" = "country"))
 
-# check your work
+## check your work
 head(countriesH)
 
 ggplot(countriesH) + geom_sf()
@@ -340,8 +340,8 @@ ggplot(countriesH) + geom_sf()
 
 ## The questions will lead you through each step. 
 
-##Question 6*****************************************************************************************
-##-------------------------------------------------------------------------------
+## Question 6*****************************************************************************************
+## -------------------------------------------------------------------------------
 
 ## Q6a. Make subset of countriesH for year equals 2020 and call it countriesH2020. Repeat in base R and tidyverse. 4 pts. 
 
@@ -349,7 +349,7 @@ ggplot(countriesH) + geom_sf()
 
 
 
-##Q6b.Map the countriesH2020 by the attribute Life.Ladder. Use code you learned in Lab 4 to map the polygons by an attribute.
+## Q6b.Map the countriesH2020 by the attribute Life.Ladder. Use code you learned in Lab 4 to map the polygons by an attribute.
 ## Use 5 breaks and any color you want. 4 pts. 
 
 
@@ -358,27 +358,27 @@ ggplot(countriesH) + geom_sf()
 
 
 
-##Q6d. For countries with reported happiness ratings, what is the relationship between latitude (Y coordinate) and 
+## Q6d. For countries with reported happiness ratings, what is the relationship between latitude (Y coordinate) and 
 ## life.ladder in 2020? Is latitude a predictor of life ladder happiness? 20 pts.
 
 ## you may use base R or tidyverse to answer this question (or a combination).
 ## You will need to use material from lab 4.
 
 ## Hint - 
-##1) turn your countriesH2020 into points, 
-##2) get the y coordinate value and take the absolute value using abs() and add these values to the dataframe in a field called y,
-##3) and predict 2020 life happiness (x) by latitude (y) in a linear regression. 
+## 1) turn your countriesH2020 into points, 
+## 2) get the y coordinate value and take the absolute value using abs() and add these values to the dataframe in a field called y,
+## 3) and predict 2020 life happiness (x) by latitude (y) in a linear regression. 
 
 
 
-##Q6e. Plot life ladder happiness in 2020 (x) as a function of latitude (y) on a scatter plot and add the linear regression line 6 pts. 
+## Q6e. Plot life ladder happiness in 2020 (x) as a function of latitude (y) on a scatter plot and add the linear regression line 6 pts. 
 ## repeat in ggplot and in base R. 
 
 
 
-##Q6f. Summarize the results of the linear model above. Is Latitude a strong predictor of life.ladder happiness? be specific. 6 pts. 
+## Q6f. Summarize the results of the linear model above. Is Latitude a strong predictor of life.ladder happiness? be specific. 6 pts. 
 
 
-##*****************************************************************************************************
+## *****************************************************************************************************
 
-##Congratulations! You just did a spatial linear regression!
+## Congratulations! You just did a spatial linear regression!
