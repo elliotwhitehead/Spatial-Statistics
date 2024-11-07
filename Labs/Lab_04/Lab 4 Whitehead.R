@@ -506,7 +506,7 @@ ggplot() +
 ## differences at a local scale. Also, there is a scale problem with the units of
 ## measurement. California is such an outlier in this data, that it appears as if
 ## There were hardly any other wildfires in the rest of the states. This map makes
-## it seam like California is nearly the only state experiencing sever wildfire,
+## it seam like California is nearly the only state experiencing severe wildfire,
 ## and also reduced the resolution to be able to differentiate data between all
 ## the other states in west / midwest.
 
@@ -516,22 +516,53 @@ ggplot() +
 ## Question 12*****************************************************************************************
 ## ----------------------------------------------------------------------------------------------------
 
-## Q12a. Count the number of fires in each. Which state has the highest number of fires? 8 pts
+## Q12a. Count the number of fires in each state. Which state has the highest number of fires? 8 pts
 ## Use the tools you have learned. How would yo do this? HINT - you will need to make a new field in firePoints. 
 ## your final field in 'states' needs to be called 'fireCount'
 
-## add fireCount to data set
+## instantiate vector for state names
+state_names <- vector("character", length=nrow(firePoints))
 
+## loop through firePoints to see which state contains the fire
+for (i in 1:nrow(firePoints)) {
+  fire <- firePoints[i, ]
+  containing_state <- states[st_within(fire, states, sparse = FALSE), ]
+  state_names[i] <- containing_state$NAME
+}
 
+## Add state name to firePoints
+firePoints$STATE <- state_names
+
+## Make a fireCount column
+states$fireCount <- 0
+
+## loop through states and tally fires
+for (i in 1:nrow(states)){
+  state_name <- states[i,]$NAME
+  states[i,]$fireCount <- sum(state_names == states[i,]$NAME)
+} 
+
+states[which.max(states$fireCount),]$NAME
+## Florida had the highest number of wildfires in 2020
 
 
 ## Q12b. Map states by number of fires (not areaFire). How does this map differ from the areaFire map? 4pts. 
 
+ggplot() + 
+  geom_sf(data = states, aes(fill=as.numeric(fireCount) ) )+
+  scale_fill_fermenter(palette = "Oranges",n.breaks = 5, direction=1)
+
+## this map gives us a much better understanding at the *number* of wildfires
+## happening across the US, showing much more happening in the south, however,
+## the *size* of the fires is not conveyed.
 
 
 ## Q12c. Standardize the count variable by areaState to create a density map. Make a map of 'fireDensity'. 4 pts. 
+states$fireDensity <- states$fireCount / areaState
 
-
+ggplot() + 
+  geom_sf(data = states, aes(fill=as.numeric(fireDensity) ) )+
+  scale_fill_fermenter(palette = "Oranges",n.breaks = 5, direction=1)
 
 ## ****************************************************************************************************************************************
 
