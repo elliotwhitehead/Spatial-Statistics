@@ -238,7 +238,7 @@ happinessData <- na.omit(happinessData)
 
 dim(happinessData)
 
-## We removed 241 rows with NA values. Now we are ready for statistics!Remember this as you move forward doing your own statistics.
+## We removed 241 rows with NA values. Now we are ready for statistics! Remember this as you move forward doing your own statistics.
 ## If the code isn't working, check for NAs and remove them or replace them with 0s. 
 
 ## run the correlation function on the cleaned data
@@ -251,25 +251,32 @@ cor(happinessData$Freedom.to.make.life.choices, happinessData$Life.Ladder)
 ## -------------------------------------------------------------------------------
 
 ## Q4a. Run the correlation between Gross Domestic Product (GDP) per capita (Log.GDP.per.capita) and life ladder. Show code. 4 pts. 
-
-
+cor(happinessData$Log.GDP.per.capita, happinessData$Life.Ladder)
+## 0.793 - very strong and positive.
 
 ## Q4b. Run the correlation between freedom to make life choices and life ladder. Show code. 4 pts. 
-
-
+cor(happinessData$Freedom.to.make.life.choices, happinessData$Life.Ladder)
+## 0.525 - strong and positive
 
 ## Q4c. Which correlation coefficient is higher or lower? 2 pts
 ## Does this match your predictions based on the scatter plot? 
 ## Do these variables have a linear relationship? 
-
+## The correlation between Life.Ladder and Log GDP is stronger than Life.Ladder to
+## Freedom.to.make.life.choices. This is in line with my prediction. You can see
+## that the data is much more closely clustered to a would-be line of best fit.
+## Log GDP has a much more linear relationship than Life choices. Life choices was
+## much more scattered and had outliers. 
 
 
 ## Q4d. Now create a scatter plot between Log.GDP.per.capita and Freedom.to.make.life.choices and then run a correlation. 6pts
-
-
+ggplot(happinessData) + aes(x=Log.GDP.per.capita, y=Freedom.to.make.life.choices) + geom_point() +
+  ggtitle("Log GDP vs Freedom to Make Life Choices, All Countries")
+cor(happinessData$Log.GDP.per.capita, happinessData$Freedom.to.make.life.choices)
+## 0.353
 
 ## How would you describe the relationship (strength and direction) between Log.GDP.per.capita and Freedom.to.make.life.choices? 2 pts. 
-
+## There is a positive correlation between Log GDP and Freedom to make life choices,
+## but it's a weak correlation of 0.353.
 
 
 ## Step 4 *******************************************************************************************************
