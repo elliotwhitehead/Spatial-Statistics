@@ -15,11 +15,11 @@ library(ggplot2)
 
 ## Step 1 ***************************************************************************
 ## set your working directory - change this to your working directory.
-setwd('C:/Users/tchapman.TNC/Desktop/Classes/GEOG 3032 Spatial stats/Labs/Lab 5/data')
+setwd('/Users/elliotwhitehead/Downloads/00_School/GEOG 3023/Labs/Lab_05')
 
 
 ## read in happiness data
-happinessData <- read.csv('WHR2021.csv')
+happinessData <- read.csv('data/WHR2021.csv')
 
 ## get head and dimensions of happiness data
 head(happinessData)
@@ -33,10 +33,9 @@ dim(happinessData)
 (unique(happinessData$country))
 
 ## find unique countries in tidyverse
-(happinessData %>%
-  distinct(country))
+(happinessData %>% distinct(country))
 
-## In this lab, we will explore doing manipulations in base R and tidyverse. 
+  ## In this lab, we will explore doing manipulations in base R and tidyverse. 
 
 ## make subset of columns for a select country in base R selecting appropriate rows and columns
 happinessDataUS <- happinessData[which(happinessData$country== 'United States'),]
@@ -66,10 +65,13 @@ ggplot(happinessDataUS) + aes(x=year, y=Life.Ladder) + geom_point()+
 
 ## Q 1a. Select a different country and a different metric of happiness from the database and create a scatter plot over time. 
 ## Make sure to change the title of the graph. Repeat the operation in base R and tidyverse. Show your code. 4 pts. 
-
+happyDenmark <- happinessData %>% filter(country == "Denmark")
+ggplot(happyDenmark) + aes(x=year, y=Healthy.life.expectancy.at.birth) + geom_point()+
+  ggtitle("Denmark Healthy.life.expectancy.at.birth, 2005-2020")
 
 
 ## Q1b. Describe the trend over time. Is it positive or negative or neutral? 2 pts.
+## The trend is shows a strong positive correlation over time. Nearly linear!
 
 
 ## ****************************************************************************
