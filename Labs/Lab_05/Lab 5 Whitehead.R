@@ -194,26 +194,31 @@ ggplot(data = happyDenmarkRussia, aes(x = country, y = Healthy.life.expectancy.a
 ## Q3a. Create a scatter plot of freedom to make life choices and life ladder including all countries and all years 2pts
 ## Repeat with base R and ggplot
 
+## base R plot
+plot(x=happinessData$Life.Ladder, y=happinessData$Freedom.to.make.life.choices, main = "Freedom to Make Life Choices vs Life Ladder, All Countries", pch=19)
+## ggplot
+ggplot(happinessData) + aes(x=Life.Ladder, y=Freedom.to.make.life.choices) + geom_point() +
+  ggtitle("Freedom to Make Life Choices vs Life Ladder, All Countries")
 
-
-
-## Q3b. Based on the scatterplot, what will be the direction (positive, negative, or neautral) of the relationship between these variables? 2pts
-
-
-
+## Q3b. Based on the scatterplot, what will be the direction (positive, negative, or neutral) of the relationship between these variables? 2pts
+## Based on the scatterplot, the direction of the correlation will be positive. 
 
 ## Q3c. Create a scatter plot of log of Gross Domestic Product (GDP) per capita and life ladder 2pts
 ## Repeat with base R and ggplot
 
+## base R plot
+plot(x=happinessData$Life.Ladder, y=happinessData$Log.GDP.per.capita, main = "Log GDP vs Life Ladder, All Countries", pch=19)
 
+## ggplot
+ggplot(happinessData) + aes(x=Life.Ladder, y=Log.GDP.per.capita) + geom_point() +
+  ggtitle("Log GDP vs Life Ladder, All Countries")
 
-## Q3d. Based on the scatterplot, what will be the direction (positive, negative, or neautral) of the relationship between these variables? 2pts
-
-
+## Q3d. Based on the scatterplot, what will be the direction (positive, negative, or neutral) of the relationship between these variables? 2pts
+## Based on the scatterplot, the direction of the correlation between Log DGP and Life.Ladder will be positive. 
 
 
 ## Q3e. Comparing the two scatterplots, which two variables do you think will have a larger correlation (R) value? Why? Be specific. 4 pts. 
-
+## Log GDP will have a larger correlation value to Life Ladder than Freedom to make life choices.
 
 
 
