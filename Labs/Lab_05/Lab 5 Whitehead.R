@@ -313,21 +313,20 @@ ggplot(happinessData) + aes(x=Freedom.to.make.life.choices, y=Life.Ladder) + geo
 ## -------------------------------------------------------------------------------
 
 ## Q5a. Create a linear model predicting life ladder with Log.GDP.per.capita. 4 pts
-
-
-
+lm_LL_GDP <- lm(happinessData$Life.Ladder ~ happinessData$Log.GDP.per.capita)
+summary(lm_LL_GDP)
+lm_LL_GDP$coefficients
 
 ## Q5b. What is the adjusted R-squared value? What does this value mean? 2 pts. 
-
-
+## The adjusted R-squared is: 0.6284
 
 ## Q5c. What is the slope for this model and what does the slope mean? 4pts. 
-
-
+## The slope for this model is 0.7779594 This tells us how much Life.ladder increases
+## for each increase in Freedom.to.make.life.choices
 
 ## Q5d. Which predictor variable (Log.GDP.per.capita or Freedom.to.make.life.choices) is a stronger predictor of life ladder happiness? 4 pts. 
 ## Explain your answer.
-
+lm_LL_GDP <- lm(happinessData$Life.Ladder ~ happinessData$Log.GDP.per.capita)
 
 
 
