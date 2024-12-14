@@ -139,12 +139,19 @@ happinessDataUSGermany %>%
 ## and create a comparison scatter plot of the variable over time between the two countries. 
 ## Make sure to change the title of the graph. Repeat in base R and tidyverse. Show your code. 8 pts. 
 
+happyDenmarkRussia <- happinessData %>% #filter to Denmark and Russia
+  filter(country == 'Denmark' | country == 'Russia') %>%
+  select(country, Healthy.life.expectancy.at.birth, year)
 
-
-
+ggplot(happyDenmarkRussia) + aes(x=year, y=Healthy.life.expectancy.at.birth, color=country) + geom_line() +
+  ggtitle("Mean Healthy.life.expectancy.at.birth, 2005-2020")
 
 ## Q2b. Describe the trend over time for each country and how the two countries compare. 4 pts.
 
+## Both Denmark and Russia's life expectancy has been increasing over the last 15 years,
+## however the rate for Denmark's life expectancy increase has been accelerating, while
+## the rate of increase for Russia has been decreasing. Denmark's life expectancy is much
+## higher than Russia's.
 
 
 
@@ -152,6 +159,23 @@ happinessDataUSGermany %>%
 ## Which country has a higher median value over time?  
 ## Use just tidyverse to make your boxplots.
 
+## summary statistics using tidyverse
+happyDenmarkRussia %>%
+  group_by(country)%>%
+  summarize(
+    Mean = mean(Healthy.life.expectancy.at.birth),
+    Median = median(Healthy.life.expectancy.at.birth),
+    SD = sd(Healthy.life.expectancy.at.birth)
+  )
+
+ggplot(data = happyDenmarkRussia, aes(x = country, y = Healthy.life.expectancy.at.birth, fill = country)) +
+  geom_boxplot() +
+  labs(title = "Life Expectancy for Russia and Denmark", x = "Country", y = "Life Expectancy")
+
+## the boxplots show a similar story as the line chart. Denmark has a much higher
+## median life expectancy of 71.3, compared to Russia's 62.3. The range for Russia
+## is greater, which is good to see, showing that they've come a long way since 
+## 2006. 
 
 
 ## Step 3 Correlations ****************************************************************************
