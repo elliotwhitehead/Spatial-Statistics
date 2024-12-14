@@ -309,6 +309,9 @@ abline(lm(happinessData$Life.Ladder ~happinessData$Freedom.to.make.life.choices)
 ggplot(happinessData) + aes(x=Freedom.to.make.life.choices, y=Life.Ladder) + geom_point() +
   geom_smooth(method='lm', formula=y~x, color = "red")
 
+ggplot(happinessData) + aes(x=Log.GDP.per.capita, y=Life.Ladder) + geom_point() +
+  geom_smooth(method='lm', formula=y~x, color = "red")
+
 ## Question 5*******************************************************************************************
 ## -------------------------------------------------------------------------------
 
@@ -322,12 +325,13 @@ lm_LL_GDP$coefficients
 
 ## Q5c. What is the slope for this model and what does the slope mean? 4pts. 
 ## The slope for this model is 0.7779594 This tells us how much Life.ladder increases
-## for each increase in Freedom.to.make.life.choices
+## for each increase in Log.GDP
 
-## Q5d. Which predictor variable (Log.GDP.per.capita or Freedom.to.make.life.choices) is a stronger predictor of life ladder happiness? 4 pts. 
-## Explain your answer.
-lm_LL_GDP <- lm(happinessData$Life.Ladder ~ happinessData$Log.GDP.per.capita)
-
+## Q5d. Which predictor variable (Log.GDP.per.capita or Freedom.to.make.life.choices) 
+## is a stronger predictor of life ladder happiness? 4 pts. Explain your answer.
+## Freedom to make life choices is a stronger predictor of life ladder, as the 
+## slope of the linear model is much steeper. for each increase in Freedom to make
+## life choices, life ladder increases much more.
 
 
 ## Step 5******************************************************************************************************
